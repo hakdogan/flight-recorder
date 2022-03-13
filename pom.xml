@@ -9,6 +9,7 @@
     <version>1.0.0-SNAPSHOT</version>
     <modules>
         <module>record-event</module>
+        <module>categories</module>
     </modules>
 
     <properties>
