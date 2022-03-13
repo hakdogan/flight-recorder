@@ -13,7 +13,7 @@ import java.util.stream.IntStream;
 public class HelloEvent
 {
     @Name("org.jugistanbul.Hello")
-    @Label("Example1")
+    @Label("Hello Event")
     @Description("This example demonstrates the monitoring of events consisting of messages sent at a random time.")
     @Category({ "Demonstration", "Tutorial" })
     static class Hello extends Event {
