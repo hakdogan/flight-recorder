@@ -1,6 +1,33 @@
 # Record Event
 
+Through a messaging example, this module shows you how to create your own events, record data, and view these records on the terminal.
+
+```java
+    @Name("org.jugistanbul.Hello")
+    @Label("Hello Event")
+    @Description("This example demonstrates the monitoring of events consisting of messages sent at a random time.")
+    @Category({ "Demonstration", "Tutorial" })
+    static class Hello extends Event {
+        @Label("Message")
+        String message;
+    }
+
+    private static void fireEvent(final int number){
+        HELLO_EVENT.begin();
+        var sleep = ThreadLocalRandom.current().nextInt(2, 10);
+        try {
+            TimeUnit.SECONDS.sleep(sleep);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        HELLO_EVENT.message = "Event " + number;
+        HELLO_EVENT.commit();
+    }
+```
+## To start recording
 ```bash
+# sh recordEvent.sh
+
 java -XX:StartFlightRecording:filename=helloEvent.jfr HelloEvent.java
 
 [0.766s][info][jfr,startup] Started recording 1. No limit specified, using maxsize=250MB as default.
@@ -8,7 +35,11 @@ java -XX:StartFlightRecording:filename=helloEvent.jfr HelloEvent.java
 [0.766s][info][jfr,startup] Use jcmd 12970 JFR.dump name=1 to copy recording data to file.
 ```
 
+## To view and parse the recordings
 ```bash
+# make sure the helloEvent.jfr file is created before running this script
+# sh viewRecordFile.sh
+
 jfr print --events Hello helloEvent.jfr
 
 org.jugistanbul.Hello {
