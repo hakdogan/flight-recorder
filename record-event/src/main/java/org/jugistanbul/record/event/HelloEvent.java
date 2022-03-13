@@ -21,21 +21,21 @@ public class HelloEvent
         String message;
     }
 
-    private static final Hello EVENT = new Hello();
+    private static final Hello HELLO_EVENT = new Hello();
 
     public static void main(String[] args) {
         IntStream.rangeClosed(1, 10).forEach(HelloEvent::fireEvent);
     }
 
     private static void fireEvent(final int number){
-        EVENT.begin();
+        HELLO_EVENT.begin();
         var sleep = ThreadLocalRandom.current().nextInt(2, 10);
         try {
             TimeUnit.SECONDS.sleep(sleep);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-        EVENT.message = "Event " + number;
-        EVENT.commit();
+        HELLO_EVENT.message = "Event " + number;
+        HELLO_EVENT.commit();
     }
 }
