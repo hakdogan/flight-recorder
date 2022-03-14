@@ -6,4 +6,4 @@ cd src/main/java/org/jugistanbul/category
 # jfr print --events FileRead categorizedEvents.jfr
 
 # make sure the categorizedEvents.jfr file is created before running this script
-jfr print --categories JUG_Istanbul categorizedEvents.jfr
+jfr print --categories IO categorizedEvents.jfr

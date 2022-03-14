@@ -18,11 +18,11 @@ import java.util.stream.Stream;
 public class CategorizedEvents
 {
 
-    private static final String CATEGORY = "JUG_Istanbul";
+    private static final String CATEGORY = "IO";
     private static final String FILE_READ = "File Read";
     private static final String LIST_FILES = "List Files";
 
-    @Name("com.oracle.FileRead")
+    @Name("org.jugistanbul.FileRead")
     @Label(FILE_READ)
     @Category({CATEGORY, FILE_READ})
     private static class FileRead extends Event {
@@ -30,7 +30,7 @@ public class CategorizedEvents
         int bytesReader;
     }
 
-    @Name("com.oracle.FileList")
+    @Name("org.jugistanbul.FileList")
     @Label(LIST_FILES)
     @Category({CATEGORY, LIST_FILES})
     private static class FileList extends Event {}

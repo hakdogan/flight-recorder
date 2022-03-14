@@ -3,17 +3,17 @@
 Categories allow you to separate events. This module shows you how categories avoid overlap when events are represented in a graphical user interface.
 
 ```java
-    @Name("com.oracle.FileRead")
+    @Name("org.jugistanbul.FileRead")
     @Label(FILE_READ)
-    @Category({FLIGHT_RECORDER_SAMPLES, FILE_READ})
+    @Category({CATEGORY, FILE_READ})
     private static class FileRead extends Event {
         @DataAmount
-        int bytesReaden;
+        int bytesReader;
     }
 
-    @Name("com.oracle.FileList")
+    @Name("org.jugistanbul.FileList")
     @Label(LIST_FILES)
-    @Category({FLIGHT_RECORDER_SAMPLES, LIST_FILES})
+    @Category({CATEGORY, LIST_FILES})
     private static class FileList extends Event {}
 
     public static void main(String[] args) {
@@ -45,9 +45,9 @@ Categories allow you to separate events. This module shows you how categories av
 
 java -XX:StartFlightRecording:filename=categorizedEvents.jfr CategorizedEvents.java
 
-[0.692s][info][jfr,startup] Started recording 1. No limit specified, using maxsize=250MB as default.
-[0.692s][info][jfr,startup] 
-[0.692s][info][jfr,startup] Use jcmd 13209 JFR.dump name=1 to copy recording data to file.
+[0.768s][info][jfr,startup] Started recording 1. No limit specified, using maxsize=250MB as default.
+[0.768s][info][jfr,startup] 
+[0.768s][info][jfr,startup] Use jcmd 2204 JFR.dump name=1 to copy recording data to file.
 ```
 
 ## To view and parse the recordings
@@ -56,11 +56,11 @@ java -XX:StartFlightRecording:filename=categorizedEvents.jfr CategorizedEvents.j
 # jfr print --events FileRead categorizedEvents.jfr
 
 # make sure the categorizedEvents.jfr file is created before running this script
-jfr print --categories JUG_Istanbul categorizedEvents.jfr
+jfr print --categories IO categorizedEvents.jfr
 
-com.oracle.FileList {
-  startTime = 23:05:22.476
-  duration = 1.62 ms
+org.jugistanbul.FileList {
+  startTime = 09:36:09.591
+  duration = 1.68 ms
   eventThread = "main" (javaThreadId = 1)
   stackTrace = [
     org.jugistanbul.category.CategorizedEvents.main(String[]) line: 45
@@ -72,9 +72,9 @@ com.oracle.FileList {
   ]
 }
 
-com.oracle.FileRead {
-  startTime = 23:05:22.480
-  duration = 1.54 ms
+org.jugistanbul.FileRead {
+  startTime = 09:36:09.594
+  duration = 1.99 ms
   bytesReader = 12 bytes
   eventThread = "main" (javaThreadId = 1)
   stackTrace = [
