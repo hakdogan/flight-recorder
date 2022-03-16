@@ -10,6 +10,7 @@
     <modules>
         <module>record-event</module>
         <module>categories</module>
+        <module>threshold</module>
     </modules>
 
     <properties>
