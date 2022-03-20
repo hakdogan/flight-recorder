@@ -39,7 +39,7 @@ You can terminate the periodic event by pressing any key...
 # sh viewRecordFile.sh
 
 # make sure the periodic.jfr file is created before running this script
-jfr print --events DirectoryWatcher periodic.jfr
+jfr print --events ChangeDetector periodic.jfr
 
 org.jugistanbul.ChangeDetector {
   startTime = 22:03:30.392
