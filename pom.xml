@@ -11,6 +11,7 @@
         <module>record</module>
         <module>categories</module>
         <module>threshold</module>
+        <module>periodic</module>
     </modules>
 
     <properties>
