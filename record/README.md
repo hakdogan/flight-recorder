@@ -1,4 +1,4 @@
-# Record Event
+# Record
 
 Through a messaging example, this module shows you how to create your own events, record data, and view these records on the terminal.
 
@@ -48,10 +48,10 @@ org.jugistanbul.Hello {
   message = "Event 1"
   eventThread = "main" (javaThreadId = 1)
   stackTrace = [
-    org.jugistanbul.record.event.HelloEvent.fireEvent(int) line: 39
+    HelloEvent.fireEvent(int) line: 39
     java.util.stream.Streams$RangeIntSpliterator.forEachRemaining(IntConsumer) line: 104
     java.util.stream.IntPipeline$Head.forEach(IntConsumer) line: 617
-    org.jugistanbul.record.event.HelloEvent.main(String[]) line: 27
+    HelloEvent.main(String[]) line: 27
     jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Method, Object, Object[])
   ]
 }

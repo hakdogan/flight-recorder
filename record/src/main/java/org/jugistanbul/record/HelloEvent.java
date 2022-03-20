@@ -1,4 +1,4 @@
-package org.jugistanbul.record.event;
+package org.jugistanbul.record;
 
 import jdk.jfr.*;
 
