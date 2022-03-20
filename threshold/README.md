@@ -25,6 +25,8 @@ java -XX:StartFlightRecording:filename=eventThreshold.jfr EventThreshold.java
 
 ## To view and parse the recordings
 ```bash
+# sh viewRecordFile.sh
+
 # make sure the eventThreshold.jfr file is created before running this script
 jfr print --events LongExecutionTime eventThreshold.jfr
 

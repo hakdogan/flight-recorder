@@ -52,6 +52,8 @@ java -XX:StartFlightRecording:filename=categorizedEvents.jfr CategorizedEvents.j
 
 ## To view and parse the recordings
 ```bash
+# sh viewRecordFile.sh
+
 # jfr print --events FileList categorizedEvents.jfr
 # jfr print --events FileRead categorizedEvents.jfr
 
