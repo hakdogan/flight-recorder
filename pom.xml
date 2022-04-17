@@ -12,6 +12,7 @@
         <module>categories</module>
         <module>threshold</module>
         <module>periodic</module>
+        <module>streams</module>
     </modules>
 
     <properties>
