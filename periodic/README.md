@@ -27,6 +27,8 @@ FlightRecorder API allows you to create a periodic event with @Period annotation
 ```bash
 # sh recordEvent.sh
 
+java -XX:StartFlightRecording:filename=periodic.jfr PeriodicEvent.java
+
 [0.598s][info][jfr,startup] Started recording 1. No limit specified, using maxsize=250MB as default.
 [0.598s][info][jfr,startup] 
 [0.598s][info][jfr,startup] Use jcmd 10341 JFR.dump name=1 to copy recording data to file.
