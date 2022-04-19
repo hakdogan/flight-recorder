@@ -1,15 +1,12 @@
-package org.jugistanbul.stream;
+package org.jugistanbul.stream.active;
 
-import jdk.jfr.consumer.EventStream;
 import jdk.jfr.consumer.RecordingStream;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GarbageCollectionInfoEvent
 {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         try (var rs = new RecordingStream()) {
             rs.onEvent("jdk.GarbageCollection", event -> {
