@@ -2,7 +2,6 @@
 
 FlightRecorder API allows you to subscribe to specific JFR data via event streaming. An event stream is a sequence of events. Streams that start with a recording are called active event streams, while streams created from the current JVM repository are called passive event streams. This module exemplifies the use of event streams to monitoring events.
 
-
 ```java
         try (var rs = new RecordingStream()) {
             rs.onEvent("jdk.GarbageCollection", event -> {
@@ -20,6 +19,26 @@ FlightRecorder API allows you to subscribe to specific JFR data via event stream
                     numberList.add(j);
                 }
             }
+        }
+```
+
+```java
+        AtomicInteger timer = new AtomicInteger();
+
+        try (var es = EventStream.openRepository()) {
+            es.onEvent("jdk.CPULoad", event -> {
+            System.out.println("CPU Load " + event.getEndTime());
+            System.out.println("Machine total: " + 100 * event.getFloat("machineTotal") + "%");
+            System.out.println("JVM User: " + 100 * event.getFloat("jvmUser") + "%");
+            System.out.println("JVM System: " + 100 * event.getFloat("jvmSystem") + "%");
+            System.out.println();
+    
+            if (timer.incrementAndGet() == CPU_LOAD_EVENTS) {
+                System.exit(0);
+            }
+        });
+
+        es.start();
         }
 ```
 
@@ -52,6 +71,40 @@ Garbage collection: 6
 Cause: G1 Evacuation Pause
 Total pause: PT0.020502123S
 Longest pause: PT0.020502123S
+```
+
+```bash
+# recordPassiveEvent.sh
+
+java -XX:StartFlightRecording:filename=passiveEvent.jfr CPULoadInfoEvent.java
+
+[0.750s][info][jfr,startup] Started recording 1. No limit specified, using maxsize=250MB as default.
+[0.750s][info][jfr,startup]
+[0.750s][info][jfr,startup] Use jcmd 3838 JFR.dump name=1 to copy recording data to file.
+CPU Load 2022-04-19T19:22:59.970643459Z
+Machine total: 10.421837%
+JVM User: 7.235302%
+JVM System: 0.36363786%
+
+CPU Load 2022-04-19T19:23:00.975131505Z
+Machine total: 6.203474%
+JVM User: 1.4093271%
+JVM System: 0.19294728%
+
+CPU Load 2022-04-19T19:23:01.979060839Z
+Machine total: 3.9800994%
+JVM User: 0.27946898%
+JVM System: 0.09509539%
+
+CPU Load 2022-04-19T19:23:02.985512560Z
+Machine total: 8.684864%
+JVM User: 0.9347291%
+JVM System: 0.10542497%
+
+CPU Load 2022-04-19T19:23:03.989737965Z
+Machine total: 5.4455442%
+JVM User: 0.33999017%
+JVM System: 0.13936256%
 ```
 
 ## To view and parse the recordings
@@ -90,6 +143,48 @@ jdk.GarbageCollection {
   cause = "G1 Evacuation Pause"
   sumOfPauses = 78.3 ms
   longestPause = 78.3 ms
+}
+```
+
+```bash
+# sh viewPassiveEventRecordFile.sh
+
+# make sure the passiveEvent.jfr file is created before running this script
+jfr print --events jdk.CPULoad passiveEvent.jfr
+
+jdk.CPULoad {
+startTime = 22:22:59.970 (2022-04-19)
+jvmUser = 7.24%
+jvmSystem = 0.36%
+machineTotal = 10.42%
+}
+
+jdk.CPULoad {
+startTime = 22:23:00.975 (2022-04-19)
+jvmUser = 1.41%
+jvmSystem = 0.19%
+machineTotal = 6.20%
+}
+
+jdk.CPULoad {
+startTime = 22:23:01.979 (2022-04-19)
+jvmUser = 0.28%
+jvmSystem = 0.10%
+machineTotal = 3.98%
+}
+
+jdk.CPULoad {
+startTime = 22:23:02.985 (2022-04-19)
+jvmUser = 0.93%
+jvmSystem = 0.11%
+machineTotal = 8.68%
+}
+
+jdk.CPULoad {
+startTime = 22:23:03.989 (2022-04-19)
+jvmUser = 0.34%
+jvmSystem = 0.14%
+machineTotal = 5.45%
 }
 ```
 
