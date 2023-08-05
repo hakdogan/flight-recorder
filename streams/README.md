@@ -130,7 +130,7 @@ JVM System: 0.13936256%
 # sh recordVirtualThreadPinnedEvent.sh
 
 java -XX:StartFlightRecording:filename=virtualThreadPinnedEvent.jfr \
-  --enable-preview --source 19 VirtualThreadPinnedEvent.java
+  --enable-preview --source 20 VirtualThreadPinnedEvent.java
   
 [0.199s][info][jfr,startup] Started recording 1. No limit specified, using maxsize=250MB as default.
 [0.199s][info][jfr,startup] 
