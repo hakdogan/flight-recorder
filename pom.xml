@@ -13,6 +13,7 @@
         <module>threshold</module>
         <module>periodic</module>
         <module>streams</module>
+        <module>profile</module>
     </modules>
 
     <properties>
